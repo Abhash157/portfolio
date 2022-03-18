@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@300&display=swap');
+/*font-family: 'Source Serif Pro', serif;*/
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+/*font-family: 'Patrick Hand', cursive;*/
+
+
+*{
+				margin:0;
+				padding:0;
+				box-sizing:border-box;
+}
+body {
+				/*background: blue;*/
+				box-sizing:border-box;
+				width: 100vw;
+				display:flex;
+				flex-direction:row;
+				transition:500ms;
+				}
+#main{
+		transition: 500ms;
+}
+
+nav{
+				box-sizing:border-box;
+				background: black;
+				height: 100vh;
+				min-height:400px;
+				width: 35vw;
+				position:fixed;
+				left:-35vw;
+				transition:500ms;
+				overflow: scroll;
+}
+.hamburger{
+				display:flex;
+				flex-direction:row;
+			 justify-content:space-between;
+}
+.hamIcon{
+				height: 35px;
+				width: 35px;
+				margin:10px 0 0 10px;
+				position:absolute;
+				transition:300ms ease-out;
+				transition-delay:0ms;
+				top:0;
+				left:0;
+				cursor:pointer;
+				z-index:1;
+}
+.crossCon{
+				/*background: purple;*/
+				text-align:right;
+}
+.crossIcon{
+				/*background: white;*/
+				height: 35px;
+				width: 35px;
+				opacity:0;
+				cursor:pointer;
+				margin-top:8px ;
+				margin-right:10px;
+				transition:300ms;
+				transition-delay:250ms;
+				/*opacity:0;*/
+}
+.navContainer{
+				margin:15px;
+}
+.navItem{
+				margin:20px 0;
+				cursor:pointer;
+				/*background: blue;*/
+}
+.navItem a{
+				cursor:pointer;
+				text-decoration:none;
+				color:red;
+				text-shadow:0 0 10px red, 0px 0px 40px red;
+}
+
+
+@media screen and (min-width:480px){
+		nav{
+				width: 20vw;
+		}
+		.navContainer{
+				margin-left:20% ;
+	  }
+}

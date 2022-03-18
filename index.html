@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+				<meta charset="UTF-8">
+				<title>My Portfolio</title>
+				<link rel="stylesheet" href="master.css">
+				<link rel="stylesheet" href="index.css">
+</head>
+
+<body id="bdy">
+				<img class="hamIcon" src="images/navmenu.png" alt="0False" id="burger" onclick="show()">
+				<main id="main">
+								
+			 		<div class="intro">
+							<div class="me">Hi, <span>I am</span></div>
+							<div class="name">Abhash <span>Limbu</span></div>
+									
+							<div class="more">I am a <strong><a href="#">Front-End Web Developer</a></strong>. I love making websites using <strong><a href="#">HTML</a></strong> , <a href="#"><span></a><strong><a href="#">CSS</a></strong> and <strong><a href="#">Javascript</a></strong>. Programming is my passion.</div>
+									
+							<div class="getInTouch">
+									 <button class="about" onclick="redirect1()">About me</button>
+										<button class="contact" onclick="redirect2()">Contact me</button>
+							</div>
+									
+			   	</div>
+				  	
+			</main>
+				
+			 <nav id="navigation">
+			 				<div class="navBar">
+			 								<div class="crossCon">
+			 												<img class="crossIcon" src="images/cross.png" alt="0false" id="cross" onclick="hide()">
+			 								
+			 								</div>
+			 				</div>
+						 	<div class="navContainer">
+										<div class="navItem"><a href="index.html">Home</a></div>
+										<div class="navItem"><a href="project.html">Work Projects</a></div>
+										<div class="navItem"><a href="contact.html">Contact Me</a></div>
+										<div class="navItem"><a href="about.html">About </a></div>
+							 </div>
+				</nav>
+				
+				
+				<script>
+								function redirect1() {
+												window.location.replace("about.html")
+								}
+								function redirect2() {
+												window.location.replace("contact.html")
+								}
+								
+								
+				</script>
+				
+				<script src="master.js"></script>
+</body>
+</html>
