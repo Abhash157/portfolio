@@ -1,6 +1,6 @@
 
 .aboutContainer{
-      min-height:100vh;
+                                height:100vh;
 				width: 100%;
 				text-align:center;
 				word-spacing:2px;
@@ -67,7 +67,7 @@
 footer{
 				background: black;
 				padding: 12px 0;
-				position:relative;
+				position:sticky;
 				bottom:0px;
 				margin:0px;
 }
@@ -88,7 +88,7 @@ footer{
 				cursor: pointer;
 }
 #main{
-				max-height:100vh;
+				height:100vh;
 			 background: pink;				
 }
 nav{
