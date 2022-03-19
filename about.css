@@ -89,7 +89,7 @@ footer{
 }
 #main{
 				height:100vh;
-			 background: pink;				
+			        /*background: pink;*/			
 }
 nav{
 				min-height: 100%;
