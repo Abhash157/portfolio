@@ -88,7 +88,7 @@ footer{
 				cursor: pointer;
 }
 #main{
-				height:100vh;
+				max-height:100vh;
 			 background: pink;				
 }
 nav{
