@@ -4,7 +4,7 @@
 				width: 100%;
 				text-align:center;
 				word-spacing:2px;
-				margin:0;
+				padding-top:20px;
 				/*background: purple;*/
 				font-family: 'Source Serif Pro', serif;
 				font-family: 'Patrick Hand', serif;
@@ -17,6 +17,9 @@
 				width: 150px;
 				height: 150px;
 				border-radius: 50%;
+}
+.intro{
+                                margin:0 10px;
 }
 .skills{
 				text-align:left;
