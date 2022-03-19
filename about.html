@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+				<meta charset="UTF-8">
+				<title>My Portfolio</title>
+				<link rel="stylesheet" href="master.css">
+				<link rel="stylesheet" href="about.css">
+</head>
+<body id="bdy">
+				<!-- <div class="about">aqbakna</div> -->
+				<img class="hamIcon" src="images/navmenu.png" alt="0False" id="burger" onclick="show()">
+				<div id="main">
+			 <div class="aboutContainer" id="abtContainer">
+							<div class="top">
+										<img id="pp" src="images/cross.png" alt="0false">
+											<h1><span>About Me</span></h1>
+							</div>
+							<div class="about">
+											<div class="intro">
+											Hello, I am Abhash Limbu. I am a Front-End Developer and I love building and designing websites. I also love Mathematics. I am good at solving equations and logical problems.
+										 </div><br /><hr>
+									  	<div class="skills">
+										 			 <div><h3>My skills:</h3></div>
+										 			 HTML:<div class="totalSkill">
+										 			 				<div class="html"></div>
+										 			 				</div>
+										 			 CSS:<div class="totalSkill">
+										 			 				<div class="css"></div>
+										 			 </div>
+										 			 JavaScript:<div class="totalSkill">
+										 			 				<div class="js"></div>
+										 			 </div>
+										 			 PHP:<div class="totalSkill">
+										 			 				<div class="php"></div>
+										 			 </div>
+										     <div class="hire" onclick="redirectCC()">Hire me</div>
+										 </div> 
+										 <footer>
+										 <div class="social">
+										 				<img src="images/fb.png" onclick="redirectFb()" alt="">
+										 				<img src="images/insta.png" onclick="redirectInsta()" alt="">
+										 				<!-- <img src="/storage/emulated/10/projects/portfolio/images/cross.png" alt=""> -->
+										 </div>
+										 </footer>
+										 
+							</div>
+			</div>
+			</div>
+			
+				
+			  <nav id="navigation">
+			 				<div class="navBar">
+			 								<div class="crossCon">
+			 												<img class="crossIcon" src="images/cross.png" alt="0false" id="cross" onclick="hide()">
+			 								
+			 								</div>
+			 				</div>
+						 	<div class="navContainer">
+										<div class="navItem"><a href="index.html">Home</a></div>
+										<div class="navItem"><a href="project.html">Work Projects</a></div>
+										<div class="navItem"><a href="contact.html">Contact Me</a></div>
+										<div class="navItem"><a href="about.html">About </a></div>
+							 </div>
+				</nav>
+			
+			
+			<script>
+					function redirectFb() {
+							window.location.href="https://www.facebook.com/profile.php?id=100078910430458"
+					}
+					function redirectInsta() {
+							window.location.href="https://instagram.com/abhashlimbu999"
+					}
+					function redirectCC() {
+							window.location.href="contact.html"
+					}
+			</script>					
+			<script src="master.js"></script>
+</body>
+</html>
