@@ -1,59 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-				<meta charset="UTF-8">
-				<title>My Portfolio</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-				<link rel="stylesheet" href="master.css">
-				<link rel="stylesheet" href="index.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abhash Limbu</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Futuristic Spaceship Dashboard overrides -->
+    <link rel="stylesheet" href="css/spaceship.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
+<body>
+    <div class="terminal" id="terminal">
+        <div class="terminal-header">
+            <div class="terminal-buttons">
+                <span class="terminal-btn close"></span>
+                <span class="terminal-btn minimize"></span>
+                <span class="terminal-btn expand"></span>
+            </div>
+            <div class="terminal-title">L.I.M.B.U. Terminal</div>
+        </div>
+        <div class="terminal-body" id="terminal-body">
+            <div id="typing"></div>
+            <div id="command-line" class="command-line">
+                <span class="prompt">user@portfolio:~$</span>
+                <span id="command-text" class="command-text"></span>
+                <span id="cursor" class="cursor">█</span>
+            </div>
+        </div>
+        <div class="terminal-status">
+            <span class="status-item">SYSTEM: ONLINE</span>
+            <span class="status-item">SECURITY: ACTIVE</span>
+            <span class="status-item">AI: L.I.M.B.U. v2.5</span>
+        </div>
+    </div>
+    <div class="terminal-toggle" id="terminalToggle"></div>
+    
+    <!-- JARVIS HUD Elements -->
+    <div id="hud">
+        <div class="hud-corner top-left">
+            <div class="hud-line"></div>
+            <div class="hud-text">SECURE CONNECTION ESTABLISHED</div>
+        </div>
+        <div class="hud-corner top-right">
+            <div class="hud-line"></div>
+            <div class="hud-text">SYSTEM STATUS: NOMINAL</div>
+        </div>
+        <div class="hud-corner bottom-left">
+            <div class="hud-line"></div>
+            <div class="hud-text">INITIALIZING INTERFACE</div>
+        </div>
+        <div class="hud-corner bottom-right">
+            <div class="hud-line"></div>
+            <div class="hud-text">L.I.M.B.U. ACTIVE</div>
+        </div>
+    </div>
 
-<body id="bdy">
-				<img class="hamIcon" src="images/navmenu.png" alt="0False" id="burger" onclick="show()">
-				<main id="main">
-								
-			 		<div class="intro">
-							<div class="me">Hi, <span>I am</span></div>
-							<div class="name">Abhash <span>Limbu</span></div>
-									
-							<div class="more">I am a <strong><a href="#">Front-End Web Developer</a></strong>. I love making websites using <strong><a href="#">HTML</a></strong> , <a href="#"><span></a><strong><a href="#">CSS</a></strong> and <strong><a href="#">Javascript</a></strong>. Programming is my passion.</div>
-									
-							<div class="getInTouch">
-									 <button class="about" onclick="redirect1()">About me</button>
-										<button class="contact" onclick="redirect2()">Contact me</button>
-							</div>
-									
-			   	</div>
-				  	
-			</main>
-				
-			 <nav id="navigation">
-			 				<div class="navBar">
-			 								<div class="crossCon">
-			 												<img class="crossIcon" src="images/cross.png" alt="0false" id="cross" onclick="hide()">
-			 								
-			 								</div>
-			 				</div>
-						 	<div class="navContainer">
-										<div class="navItem"><a href="index.html">Home</a></div>
-										<div class="navItem"><a href="project.html">Work Projects</a></div>
-										<div class="navItem"><a href="contact.html">Contact Me</a></div>
-										<div class="navItem"><a href="about.html">About </a></div>
-							 </div>
-				</nav>
-				
-				
-				<script>
-								function redirect1() {
-												window.location.replace("about.html")
-								}
-								function redirect2() {
-												window.location.replace("contact.html")
-								}
-								
-								
-				</script>
-				
-				<script src="master.js"></script>
+    <nav class="main-nav">
+        <div class="nav-links">
+            <a href="#about" class="nav-link" data-text="About">About</a>
+            <a href="#projects" class="nav-link" data-text="Projects">Projects</a>
+            <a href="#skills" class="nav-link" data-text="Skills">Skills</a>
+            <a href="#contact" class="nav-link" data-text="Contact">Contact</a>
+        </div>
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </nav>
+
+    <main>
+        <section id="hero" class="section">
+            <div class="grid-lines"></div>
+            <div class="container">
+                <h1 class="glitch" data-text="YOUR NAME">ABHASH LIMBU</h1>
+                <h2 class="subtitle">Full Stack Developer & AI Enthusiast</h2>
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn btn-primary">Get in Touch</a>
+                    <a href="#projects" class="btn btn-secondary">View My Work</a>
+                </div>
+            </div>
+            <div class="scanline"></div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="section-title">About Me</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Hello! I'm a passionate developer with expertise in creating immersive digital experiences. With a background in computer science and a love for cutting-edge technology, I build solutions that push the boundaries of what's possible.</p>
+                        <p>My journey in tech started [your story here]. Since then, I've had the privilege of working with amazing teams and creating impactful projects.</p>
+                    </div>
+                    <div class="about-image">
+                        <div class="hexagon">
+                            <div class="hexagon-inner">
+                                <!-- Your image will go here -->
+                                <div class="placeholder-image">
+                                    <i class="fas fa-user-astronaut"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section">
+            <div class="container">
+                <h2 class="section-title">Technical Skills</h2>
+                <div class="skills-container">
+                    <div class="skill-category">
+                        <h3>Frontend</h3>
+                        <div class="skill" data-level="90">
+                            <span>HTML5 / CSS3</span>
+                            <div class="skill-bar"><div class="skill-level"></div></div>
+                        </div>
+                        <div class="skill" data-level="85">
+                            <span>JavaScript</span>
+                            <div class="skill-bar"><div class="skill-level"></div></div>
+                        </div>
+                        <div class="skill" data-level="80">
+                            <span>React</span>
+                            <div class="skill-bar"><div class="skill-level"></div></div>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Backend</h3>
+                        <div class="skill" data-level="85">
+                            <span>Node.js</span>
+                            <div class="skill-bar"><div class="skill-level"></div></div>
+                        </div>
+                        <div class="skill" data-level="80">
+                            <span>Python</span>
+                            <div class="skill-bar"><div class="skill-level"></div></div>
+                        </div>
+                        <div class="skill" data-level="75">
+                            <span>Database</span>
+                            <div class="skill-bar"><div class="skill-level"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section">
+            <div class="container">
+                <h2 class="section-title">Featured Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="images/chess.jpeg" alt="Chess" class="project-image">
+                            <div class="project-overlay">
+                                <h3>Chess</h3>
+                                <p>A modular web-based chess application with AI opponent, multiplayer, and local multiplayer features powered by Stockfish.</p>
+                                <div class="project-links">
+                                    <a href="https://abhashlimbu.com.np/ChessWeb/" class="project-link">View Demo</a>
+                                    <a href="https://github.com/Abhash157/ChessWeb" class="project-link">GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-image">
+                            <div class="project-overlay">
+                                <h3>Project Two</h3>
+                                <p>A brief description of the project and the technologies used.</p>
+                                <div class="project-links">
+                                    <a href="#" class="project-link">View Demo</a>
+                                    <a href="#" class="project-link">GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add more project cards as needed -->
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="container">
+                <h2 class="section-title">Get In Touch</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>your.email@example.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-github"></i>
+                            <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-linkedin"></i>
+                            <a href="https://linkedin.com/in/yourusername" target="_blank">linkedin.com/in/yourusername</a>
+                        </div>
+                    </div>
+                    <form id="contact-form" class="contact-form">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" required>
+                            <label for="name">Name</label>
+                            <span class="focus-border"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" required>
+                            <label for="email">Email</label>
+                            <span class="focus-border"></span>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" rows="4" required></textarea>
+                            <label for="message">Message</label>
+                            <span class="focus-border"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-text">PORTFOLIO</span>
+                    <span class="logo-cursor">_</span>
+                </div>
+                <div class="footer-links">
+                    <a href="#about">About</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="social-links">
+                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="year"></span> Your Name. All rights reserved.</p>
+                <p>Designed with <i class="fas fa-heart"></i> and <i class="fas fa-coffee"></i></p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="particles" id="particles-js"></div>
+    
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
