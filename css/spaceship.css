@@ -1,21 +1,28 @@
 /* Futuristic Spaceship Dashboard Overrides */
 :root {
-    /* Updated terminal colors */
-    --terminal-bg: rgba(10, 15, 30, 0.85);
-    --terminal-border: rgba(0, 255, 204, 0.6);
+    /* Updated terminal colors with enhanced cyberpunk palette */
+    --terminal-bg: rgba(10, 15, 30, 0.95);
+    --terminal-border: rgba(0, 255, 255, 0.6);
+    --terminal-glow: rgba(0, 255, 255, 0.4);
+    --terminal-glow-pink: rgba(255, 0, 128, 0.3);
+    --terminal-glow-orange: rgba(255, 107, 53, 0.3);
 }
 
-/* Terminal container */
+/* Terminal container with enhanced effects */
 .terminal {
-    background: radial-gradient(ellipse at center, rgba(0, 40, 60, 0.9) 0%, rgba(0, 10, 20, 0.95) 100%), var(--terminal-bg);
+    background: radial-gradient(ellipse at center, rgba(0, 40, 60, 0.9) 0%, rgba(0, 10, 20, 0.98) 100%), var(--terminal-bg);
     border: 2px solid var(--terminal-border);
-    box-shadow: 0 0 25px 5px rgba(0, 255, 204, 0.3), 0 0 40px 10px rgba(0, 255, 255, 0.15) inset;
+    box-shadow: 
+        0 0 25px 5px var(--terminal-glow), 
+        0 0 40px 10px rgba(0, 255, 255, 0.15) inset,
+        0 0 60px 15px var(--terminal-glow-pink);
 }
 
-/* Scanning grid overlay */
+/* Enhanced scanning grid overlay */
 @keyframes scan {
-    0% { transform: translateY(-100%); }
-    100% { transform: translateY(100%); }
+    0% { transform: translateY(-100%); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(100%); opacity: 0; }
 }
 
 .terminal::before {
@@ -29,14 +36,14 @@
         0deg,
         transparent 0px,
         transparent 2px,
-        rgba(0, 255, 255, 0.04) 2px,
-        rgba(0, 255, 255, 0.04) 4px
+        rgba(0, 255, 255, 0.06) 2px,
+        rgba(0, 255, 255, 0.06) 4px
     );
-    animation: scan 6s linear infinite;
+    animation: scan 8s linear infinite;
     pointer-events: none;
 }
 
-/* Glow frame */
+/* Enhanced glow frame */
 .terminal::after {
     content: "";
     position: absolute;
@@ -44,24 +51,56 @@
     left: 0;
     right: 0;
     bottom: 0;
-    border: 2px solid rgba(0, 255, 204, 0.2);
-    box-shadow: 0 0 10px 2px rgba(0, 255, 204, 0.4) inset;
+    border: 2px solid rgba(0, 255, 255, 0.3);
+    box-shadow: 
+        0 0 15px 3px var(--terminal-glow) inset,
+        0 0 30px 5px var(--terminal-glow-pink) inset;
     pointer-events: none;
 }
 
-/* Terminal header text */
+/* Enhanced terminal header text */
 .terminal-title {
-    text-shadow: 0 0 10px var(--primary);
-    letter-spacing: 2px;
+    text-shadow: 0 0 15px var(--primary), 0 0 30px var(--primary);
+    letter-spacing: 3px;
     font-weight: 700;
+    background: var(--cyber-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-/* Terminal toggle button */
+/* Enhanced terminal toggle button */
 .terminal-toggle {
-    background: linear-gradient(135deg, rgba(0, 255, 204, 0.8), rgba(0, 128, 255, 0.8));
-    box-shadow: 0 0 15px rgba(0, 255, 204, 0.6);
+    background: var(--cyber-gradient);
+    box-shadow: 
+        0 0 20px var(--terminal-glow),
+        0 0 40px var(--terminal-glow-pink);
+    border: 2px solid var(--terminal-border);
 }
 
 .terminal-toggle:hover {
-    transform: scale(1.15) rotate(90deg);
+    transform: scale(1.2) rotate(90deg);
+    box-shadow: 
+        0 0 30px var(--terminal-glow),
+        0 0 60px var(--terminal-glow-pink),
+        0 0 80px var(--terminal-glow-orange);
+}
+
+/* Enhanced terminal buttons */
+.terminal-btn.close { 
+    background: linear-gradient(45deg, #ff5f56, #ff3b30); 
+    box-shadow: 0 0 10px rgba(255, 95, 86, 0.6);
+}
+.terminal-btn.minimize { 
+    background: linear-gradient(45deg, #ffbd2e, #ffcc00); 
+    box-shadow: 0 0 10px rgba(255, 189, 46, 0.6);
+}
+.terminal-btn.expand { 
+    background: linear-gradient(45deg, #27c93f, #00ff88); 
+    box-shadow: 0 0 10px rgba(39, 201, 63, 0.6);
+}
+
+.terminal-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px currentColor;
 }
