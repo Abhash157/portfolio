@@ -1,3 +1,63 @@
+/* Gesture Navigation Styles */
+.gesture-hint {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(10, 10, 15, 0.8);
+    padding: 8px 20px;
+    border-radius: 30px;
+    border: 1px solid var(--primary);
+    box-shadow: var(--glow);
+    z-index: 100;
+    opacity: 0.8;
+    transition: var(--transition);
+}
+
+.gesture-hint span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+    color: var(--light);
+}
+
+.gesture-hint i {
+    color: var(--primary);
+    font-size: 16px;
+}
+
+/* Section transition effect */
+section {
+    transition: transform 0.3s ease-in-out;
+}
+
+.section-swipe-left {
+    transform: translateX(-100%);
+}
+
+.section-swipe-right {
+    transform: translateX(100%);
+}
+
+/* Hide scrollbar for a cleaner look */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
 /* Base Styles & Variables */
 :root {
     /* Enhanced Cyberpunk Color Palette */
