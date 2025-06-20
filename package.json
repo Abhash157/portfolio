@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "ts-dedent": "^2.2.0"
+  }
+}

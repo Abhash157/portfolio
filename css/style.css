@@ -1,3 +1,53 @@
+/* GitHub Graph Styles */
+.github-graph-container {
+    background: rgba(10, 10, 15, 0.5);
+    border-radius: 8px;
+    padding: 10px;
+    margin: 10px 0;
+    overflow: hidden;
+}
+
+.github-graph {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+}
+
+.github-graph .week {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.github-graph .day {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    background: #161b22;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.github-graph .day:hover {
+    transform: scale(1.2);
+    z-index: 1;
+    box-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+}
+
+.github-graph .day[data-level="1"] { background: #0e4429; }
+.github-graph .day[data-level="2"] { background: #006d32; }
+.github-graph .day[data-level="3"] { background: #26a641; }
+.github-graph .day[data-level="4"] { background: #39d353; }
+
+.github-graph-legend {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #8b949e;
+    margin-top: 8px;
+}
+
 /* Gesture Navigation Styles */
 .gesture-hint {
     position: fixed;

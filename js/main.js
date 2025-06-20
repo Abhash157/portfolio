@@ -1,4 +1,36 @@
-document.addEventListener('DOMContentLoaded', function() {
+// Welcome message - using String.raw to preserve all formatting
+const welcomeMessage = String.raw`
+_ ------ _ _ --__-- __- -  ____----- _ - _ 
+| | ---- (_) - |- \/- |-- | __ ) - | | | |
+| | ---- | | - | |\/| |-- | ._ \ - | | | |
+| |___-- | |-_-| |- | |-- | |_) | -|_| | |
+|_____|--|_|_- |_|- | |-_-|____/ -- \___/ 
+
+
+Welcome to the L.I.M.B.U. Terminal Interface
+Type 'help' to see available commands
+`;
+
+// Initialize terminal when DOM is loaded
+document.addEventListener('DOMContentLoaded', async function() {
+    // Load GitHub service dynamically
+    let GitHubService;
+    let githubService;
+    try {
+        const module = await import('./githubService.js');
+        GitHubService = module.default;
+        githubService = new GitHubService();
+    } catch (error) {
+        console.error('Failed to load GitHub service:', error);
+        // Create a mock service if loading fails
+        githubService = {
+            getContributions: async () => {
+                console.warn('GitHub service not available');
+                return [];
+            },
+            renderGraph: () => {}
+        };
+    }
     // Terminal elements
     const terminal = document.getElementById('terminal');
     const terminalHeader = document.querySelector('.terminal-header');
@@ -99,6 +131,44 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Terminal state
     let commandHistory = [];
+    let githubGraphContainer = null;
+    
+    // Initialize GitHub graph
+    function initGitHubGraph() {
+        if (!githubGraphContainer) {
+            githubGraphContainer = document.createElement('div');
+            githubGraphContainer.className = 'github-graph-container';
+            githubGraphContainer.style.padding = '10px';
+            githubGraphContainer.style.borderTop = '1px solid rgba(0, 255, 255, 0.1)';
+            githubGraphContainer.style.marginTop = '10px';
+            terminalBody.insertBefore(githubGraphContainer, commandLine);
+            
+            // Load initial graph
+            updateGitHubGraph();
+            
+            // Update graph every hour
+            setInterval(updateGitHubGraph, 3600000);
+        }
+    }
+    
+    // Update GitHub graph
+    async function updateGitHubGraph() {
+        if (!githubGraphContainer) return;
+        
+        try {
+            const loading = document.createElement('div');
+            loading.textContent = 'Loading GitHub contributions...';
+            githubGraphContainer.innerHTML = '';
+            githubGraphContainer.appendChild(loading);
+            
+            const weeks = await githubService.getContributions();
+            githubGraphContainer.innerHTML = '';
+            githubService.renderGraph(weeks, githubGraphContainer);
+        } catch (error) {
+            console.error('Failed to update GitHub graph:', error);
+            githubGraphContainer.innerHTML = '<div style="color: #ff6b6b;">Failed to load GitHub contributions</div>';
+        }
+    }
     let historyIndex = -1;
     let currentCommand = '';
     let isProcessing = false;
@@ -184,11 +254,66 @@ please use the contact form below.
                 return `Available themes: ${Object.keys(themes).join(', ')}`;
             }
         },
-        clear: ''
+        clear: '',
+        github: async () => {
+            try {
+                // Update the graph
+                await updateGitHubGraph();
+                
+                // Get additional stats
+                const response = await fetch('https://api.github.com/users/Abhash157/events/public');
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(data.message || 'Failed to fetch GitHub data');
+                }
+                
+                // Process events
+                const pushEvents = data.filter(event => event.type === 'PushEvent');
+                const lastPush = pushEvents[0];
+                const repoActivity = {};
+                
+                // Count commits per repo
+                pushEvents.forEach(event => {
+                    const repo = event.repo.name;
+                    const commitCount = event.payload.commits.length;
+                    repoActivity[repo] = (repoActivity[repo] || 0) + commitCount;
+                });
+                
+                // Sort repos by commit count
+                const sortedRepos = Object.entries(repoActivity)
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 5); // Top 5 most active repos
+                
+                // Format last activity time
+                const lastActivity = lastPush ? new Date(lastPush.created_at) : null;
+                const timeAgo = lastActivity ? 
+                    `${Math.floor((new Date() - lastActivity) / (1000 * 60 * 60 * 24))} days ago` : 
+                    'No recent activity';
+                
+                // Build response
+                let responseText = `GitHub Activity for Abhash157\n`;
+                responseText += `Last Push: ${timeAgo}\n\n`;
+                
+                if (sortedRepos.length > 0) {
+                    responseText += `Most Active Repositories:\n`;
+                    sortedRepos.forEach(([repo, count]) => {
+                        responseText += `- ${repo}: ${count} commit${count !== 1 ? 's' : ''}\n`;
+                    });
+                } else {
+                    responseText += 'No recent repository activity found.';
+                }
+                
+                return responseText;
+            } catch (error) {
+                console.error('GitHub command error:', error);
+                return `Error fetching GitHub data: ${error.message}`;
+            }
+        }
     };
 
     // Type writer effect
-    async function typeWriter(text, element, speed = 20) {
+    async function typeWriter(text, element, speed = 5) {
         return new Promise(resolve => {
             let i = 0;
             const type = () => {
@@ -206,11 +331,22 @@ please use the contact form below.
 
     // Print text to terminal
     async function printToTerminal(text, className = '') {
-        const line = document.createElement('div');
-        if (className) line.className = className;
-        terminalBody.insertBefore(line, commandLine);
-        await typeWriter(text, line);
-        return line;
+        // Handle multi-line text
+        const lines = text.split('\n');
+        let lastLine;
+        
+        for (let i = 0; i < lines.length; i++) {
+            const line = document.createElement('div');
+            if (className) line.className = className;
+            if (i === 0) line.style.marginTop = '0';
+            if (i === lines.length - 1) line.style.marginBottom = '0';
+            
+            terminalBody.insertBefore(line, commandLine);
+            await typeWriter(lines[i], line);
+            lastLine = line;
+        }
+        
+        return lastLine;
     }
 
     // Process command
@@ -236,7 +372,20 @@ please use the contact form below.
         // Add slight delay before response
         await new Promise(resolve => setTimeout(resolve, 200));
         
-        if (cmd === 'clear') {
+        // Handle async commands
+        if (cmd === 'github') {
+            const loading = await printToTerminal('Fetching GitHub activity...', 'command-response');
+            try {
+                const response = await responses.github();
+                terminalBody.removeChild(loading);
+                await printToTerminal(response, 'command-response');
+            } catch (error) {
+                terminalBody.removeChild(loading);
+                await printToTerminal(`Error: ${error.message}`, 'command-response error');
+            }
+            isProcessing = false;
+            return;
+        } else if (cmd === 'clear') {
             // Clear terminal
             while (terminalBody.firstChild !== commandLine) {
                 terminalBody.removeChild(terminalBody.firstChild);
@@ -262,18 +411,16 @@ please use the contact form below.
 
     // Initialize terminal
     async function initTerminal() {
-        // Initial greeting
-        await printToTerminal('Initializing L.I.M.B.U. v2.5...');
-        await new Promise(resolve => setTimeout(resolve, 500));
-        await printToTerminal('Checking system status...');
-        await new Promise(resolve => setTimeout(resolve, 300));
-        await printToTerminal('Establishing secure connection...');
-        await new Promise(resolve => setTimeout(resolve, 700));
-        await printToTerminal('\n> Welcome to the portfolio terminal interface.');
-        await printToTerminal('> Type \'help\' to see available commands.\n');
-        
-        // Focus on terminal
-        commandLine.scrollIntoView();
+        try {
+            printToTerminal(welcomeMessage, 'welcome-message');
+            initGitHubGraph();
+            
+            // Set focus to command line
+            commandLine.focus();
+        } catch (error) {
+            console.error('Error initializing terminal:', error);
+            printToTerminal('Error initializing terminal. Please check console for details.', 'error');
+        }
     }
 
     // Event listeners

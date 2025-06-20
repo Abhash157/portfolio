@@ -1,4 +1,13 @@
-document.addEventListener('DOMContentLoaded', function() {
+// Initialize gesture handling
+function initGestures() {
+    // Only run in browser environment
+    if (typeof document === 'undefined') return;
+    
+    // Check if Hammer is loaded
+    if (typeof Hammer === 'undefined') {
+        console.warn('Hammer.js not loaded. Gesture support disabled.');
+        return;
+    }
     // Add gesture hint element
     const gestureHint = document.createElement('div');
     gestureHint.className = 'gesture-hint';
@@ -125,5 +134,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { passive: true });
     
     // Initialize active section on load
-    updateActiveNavLink(sections[0].id);
-});
+    if (sections.length > 0) {
+        updateActiveNavLink(sections[0].id);
+    }
+}
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGestures);
+} else {
+    initGestures();
+}
+
+// Export for potential module usage
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { initGestures };
+}
