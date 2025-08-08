@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="github-token" content="process.env.GITHUB_TOKEN">
     <title>Abhash Limbu</title>
     <link rel="stylesheet" href="css/style.css">
     <!-- Futuristic Spaceship Dashboard overrides -->
@@ -258,5 +257,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
     <script type="module" src="js/main.js"></script>
     <script src="js/gestures.js"></script>
+    <script>
+      (async () => {
+        const endpoint = 'https://vercel-server-henna.vercel.app/api/github-contributions?username=Abhash157';
+        try {
+          const res = await fetch(endpoint);
+          const data = await res.json();
+          const total = data?.data?.user?.contributionsCollection?.contributionCalendar?.totalContributions ?? 0;
+          const box = document.getElementById('github-graph-box');
+          if (box) {
+            box.textContent = `Contributions (last 12 months): ${total}`;
+          }
+        } catch (e) {
+          console.error('Failed to load contributions', e);
+        }
+      })();
+    </script>
 </body>
 </html>
