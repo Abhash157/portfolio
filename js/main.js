@@ -1,3 +1,5 @@
+// require('dotenv').config();
+
 // Welcome message - using String.raw to preserve all formatting
 const welcomeMessage = String.raw`
 _ ------ _ _ --__-- __- -  ____----- _ - _ 
@@ -127,6 +129,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     const terminalBody = document.getElementById('terminal-body');
     const commandLine = document.querySelector('.command-line');
     const commandText = document.getElementById('command-text');
+    const githubGraphBox = document.getElementById('github-graph-box');
     const cursor = document.getElementById('cursor');
     
     // Terminal state
@@ -141,7 +144,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             githubGraphContainer.style.padding = '10px';
             githubGraphContainer.style.borderTop = '1px solid rgba(0, 255, 255, 0.1)';
             githubGraphContainer.style.marginTop = '10px';
-            terminalBody.insertBefore(githubGraphContainer, commandLine);
+            githubGraphBox.appendChild(githubGraphContainer);
             
             // Load initial graph
             updateGitHubGraph();

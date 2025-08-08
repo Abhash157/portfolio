@@ -16,41 +16,14 @@ class GitHubService {
         }
 
         try {
-            // This will be replaced with a serverless function in production
-            const response = await fetch('https://api.github.com/graphql', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `bearer ${atob('Z2hwX1BRWm9teDlqSVB0U2FUTVFFTU41TUZQUlEwZFFTVDFHbkdIaw==')}`
-                },
-                body: JSON.stringify({
-                    query: `
-                        query {
-                            user(login: "Abhash157") {
-                                contributionsCollection {
-                                    contributionCalendar {
-                                        totalContributions
-                                        weeks {
-                                            contributionDays {
-                                                contributionCount
-                                                date
-                                                weekday
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    `
-                })
-            });
-
+            const response = await fetch('/api/github/contributions');
+            
             if (!response.ok) {
-                throw new Error('Failed to fetch GitHub contributions');
+                throw new Error(`Failed to fetch contributions: ${response.statusText}`);
             }
-
-            const data = await response.json();
-            const weeks = data.data.user.contributionsCollection.contributionCalendar.weeks;
+            
+            const result = await response.json();
+            const weeks = result.data.user.contributionsCollection.contributionCalendar.weeks;
             
             // Cache the response
             this.cache = {
